@@ -2,6 +2,7 @@ package com.cursotdd.libraryapi.resource.controller;
 
 import com.cursotdd.libraryapi.dto.BookDTO;
 import com.cursotdd.libraryapi.exception.ApiError;
+import com.cursotdd.libraryapi.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,12 @@ public class BookController {
         BindingResult bindingResult = ex.getBindingResult();
 
         return new ApiError(bindingResult);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handleBusinessExceptions (BusinessException ex) {
+        return new ApiError(ex);
     }
 
 

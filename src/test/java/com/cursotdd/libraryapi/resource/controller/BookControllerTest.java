@@ -1,6 +1,7 @@
 package com.cursotdd.libraryapi.resource.controller;
 
 import com.cursotdd.libraryapi.dto.BookDTO;
+import com.cursotdd.libraryapi.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -77,6 +78,28 @@ public class BookControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("errors", hasSize(3)));
+
+    }
+
+    @Test
+    @DisplayName("Deve lançar erro ao tentar cadastrar um livro com um ISBN já utilizado")
+    public void createBookWithDuplicateIsbn() throws Exception {
+        BookDTO bookDTO = BookDTO.builder().author("J.R.R Tolkien").title("O senhor dos anéis").isbn("001").build();
+        String data = new ObjectMapper().writeValueAsString(bookDTO);
+        String errorMessage = "ISBN já está cadastrado";
+
+        BDDMockito.given(service.save(Mockito.any(Book.class))).willThrow(new BusinessException(errorMessage));
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post(BOOK_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(data);
+
+        mockMvc.perform(request)
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("errors", hasSize(1)))
+                .andExpect(jsonPath("errors[0]").value(errorMessage));
 
     }
 }
