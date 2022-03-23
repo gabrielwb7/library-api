@@ -46,10 +46,6 @@ public class BookServiceTest {
         assertThat(savedBook.getIsbn()).isEqualTo(book.getIsbn());
     }
 
-    private Book createValidBook(Book.BookBuilder builder) {
-        return builder.author("J.R.R Tolkien").title("O senhor dos anéis").isbn("001").build();
-    }
-
     @Test
     public void shouldNotSaveABookWithDuplicatedISBN() {
         Book book = createValidBook(Book.builder());
@@ -64,6 +60,10 @@ public class BookServiceTest {
         Mockito.verify(repository, Mockito.never()).save(book);
     }
 
+
+    private Book createValidBook(Book.BookBuilder builder) {
+        return builder.author("J.R.R Tolkien").title("O senhor dos anéis").isbn("001").build();
+    }
 
 
 
