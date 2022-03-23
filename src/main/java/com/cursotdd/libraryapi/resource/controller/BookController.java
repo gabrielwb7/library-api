@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import service.BookService;
+import com.cursotdd.libraryapi.service.BookService;
 
 import javax.validation.Valid;
 

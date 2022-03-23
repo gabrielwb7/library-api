@@ -1,10 +1,11 @@
-package service.impl;
+package com.cursotdd.libraryapi.service.impl;
 
 import com.cursotdd.libraryapi.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
 import com.cursotdd.libraryapi.model.repository.BookRepository;
+import com.cursotdd.libraryapi.service.BookService;
 import org.springframework.stereotype.Service;
-import service.BookService;
+
 @Service
 public class BookServiceImpl implements BookService {
 
