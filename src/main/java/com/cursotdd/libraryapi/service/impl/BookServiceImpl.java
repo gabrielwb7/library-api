@@ -4,6 +4,10 @@ import com.cursotdd.libraryapi.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
 import com.cursotdd.libraryapi.model.repository.BookRepository;
 import com.cursotdd.libraryapi.service.BookService;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,17 +31,34 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> getById(Long id) {
-        return Optional.empty();
+        return this.repository.findById(id);
     }
 
     @Override
     public void deleteBook(Book book) {
-
+        if (book == null || book.getId() == null) {
+            throw new IllegalArgumentException("Book id can't be null");
+        }
+        this.repository.delete(book);
     }
 
     @Override
     public Book update(Book book) {
-        return repository.save(book);
+        if (book == null || book.getId() == null) {
+            throw new IllegalArgumentException("Book id can't be null");
+        }
+        return this.repository.save(book);
+    }
+
+    @Override
+    public Page<Book> find(Book filter, Pageable pageRequest) {
+        Example<Book> example = Example.of(filter, ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withIgnoreNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
+
+        return repository.findAll(example, pageRequest);
     }
 
 
