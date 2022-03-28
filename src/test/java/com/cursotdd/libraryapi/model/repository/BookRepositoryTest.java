@@ -66,7 +66,7 @@ public class BookRepositoryTest {
         assertThat(savedBook.getId()).isNotNull();
     }
 
-    private Book getBook() {
+    protected static Book getBook() {
         return Book.builder().author("J.R.R Tolkien").title("O senhor dos anéis").isbn("123").build();
     }
 
