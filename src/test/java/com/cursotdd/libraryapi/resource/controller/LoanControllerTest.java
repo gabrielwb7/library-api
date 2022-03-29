@@ -8,6 +8,7 @@ import com.cursotdd.libraryapi.api.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
 import com.cursotdd.libraryapi.model.entity.Loan;
 import com.cursotdd.libraryapi.service.BookService;
+import com.cursotdd.libraryapi.service.EmailService;
 import com.cursotdd.libraryapi.service.LoanService;
 import com.cursotdd.libraryapi.service.LoanServiceTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -55,6 +56,9 @@ public class LoanControllerTest {
 
     @MockBean
     private LoanService loanService;
+
+    @MockBean
+    private EmailService emailService;
 
     @Test
     public void createLoanTest() throws Exception {
