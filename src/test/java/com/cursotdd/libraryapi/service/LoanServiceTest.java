@@ -1,7 +1,7 @@
 package com.cursotdd.libraryapi.service;
 
-import com.cursotdd.libraryapi.dto.LoanFilterDTO;
-import com.cursotdd.libraryapi.exception.BusinessException;
+import com.cursotdd.libraryapi.api.dto.LoanFilterDTO;
+import com.cursotdd.libraryapi.api.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
 import com.cursotdd.libraryapi.model.entity.Loan;
 import com.cursotdd.libraryapi.model.repository.LoanRepository;
@@ -9,15 +9,10 @@ import com.cursotdd.libraryapi.service.impl.LoanServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
-import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.*;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -28,7 +23,6 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")

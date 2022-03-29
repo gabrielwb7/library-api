@@ -1,14 +1,15 @@
-package com.cursotdd.libraryapi.dto;
+package com.cursotdd.libraryapi.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class ReturnedLoanDTO {
-    private Boolean returned;
+public class LoanFilterDTO {
+    private String isbn;
+    private String customer;
 }

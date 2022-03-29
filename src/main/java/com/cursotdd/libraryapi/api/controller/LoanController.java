@@ -1,10 +1,9 @@
-package com.cursotdd.libraryapi.resource.controller;
+package com.cursotdd.libraryapi.api.controller;
 
-import com.cursotdd.libraryapi.dto.BookDTO;
-import com.cursotdd.libraryapi.dto.LoanDTO;
-import com.cursotdd.libraryapi.dto.LoanFilterDTO;
-import com.cursotdd.libraryapi.dto.ReturnedLoanDTO;
-import com.cursotdd.libraryapi.exception.BusinessException;
+import com.cursotdd.libraryapi.api.dto.BookDTO;
+import com.cursotdd.libraryapi.api.dto.LoanDTO;
+import com.cursotdd.libraryapi.api.dto.LoanFilterDTO;
+import com.cursotdd.libraryapi.api.dto.ReturnedLoanDTO;
 import com.cursotdd.libraryapi.model.entity.Book;
 import com.cursotdd.libraryapi.model.entity.Loan;
 import com.cursotdd.libraryapi.service.BookService;
@@ -18,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.websocket.server.PathParam;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +33,7 @@ public class LoanController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody LoanDTO dto) {
+    public Long create(@RequestBody @Valid LoanDTO dto) {
         Book book = bookService.getBookByIsbn(dto.getIsbn())
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found for passed isbn"));
         Loan loan = Loan.builder()

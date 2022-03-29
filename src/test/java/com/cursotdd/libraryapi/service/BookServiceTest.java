@@ -1,6 +1,6 @@
 package com.cursotdd.libraryapi.service;
 
-import com.cursotdd.libraryapi.exception.BusinessException;
+import com.cursotdd.libraryapi.api.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
 import com.cursotdd.libraryapi.model.repository.BookRepository;
 import org.assertj.core.api.Assertions;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Example;

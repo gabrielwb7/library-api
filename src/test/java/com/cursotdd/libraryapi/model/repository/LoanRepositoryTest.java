@@ -13,8 +13,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static com.cursotdd.libraryapi.model.repository.BookRepositoryTest.getBook;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,24 +32,16 @@ public class LoanRepositoryTest {
 
     @Test
     public void existsByBookAndNotReturned() {
-        Book book = getBook();
-        Loan loan = Loan.builder().book(book).customer("Fulano").loanDate(LocalDate.now()).build();
+        Loan loan = createLoan();
 
-        entityManager.persist(book);
-        entityManager.persist(loan);
-
-        boolean exists = repository.existsByBookAndNotReturned(book);
+        boolean exists = repository.existsByBookAndNotReturned(loan.getBook());
 
         assertThat(exists).isTrue();
     }
 
     @Test
     public void findByBookIsbnOrCustomerTest() {
-        Book book = getBook();
-        Loan loan = Loan.builder().book(book).customer("Fulano").loanDate(LocalDate.now()).build();
-
-        entityManager.persist(book);
-        entityManager.persist(loan);
+        Loan loan = createLoan();
 
         Page<Loan> result = repository.findByBookIsbnOrCustomer("123", "Fulano", PageRequest.of(0,10));
 
@@ -59,6 +51,34 @@ public class LoanRepositoryTest {
         assertThat(result.getPageable().getPageSize()).isEqualTo(10);
     }
 
+    @Test
+    public void notFindByLoanDateLessThanAndNotReturnedTest() {
+        Loan loan = createLoan();
+
+        List<Loan> result = repository.findByLoanDateLessThanAndNotReturned(LocalDate.now().minusDays(4));
+
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    public void findByLoanDateLessThanAndNotReturnedTest() {
+        Loan loan = createLoan();
+        loan.setLoanDate(LocalDate.now().minusDays(5));
+
+        List<Loan> result = repository.findByLoanDateLessThanAndNotReturned(LocalDate.now().minusDays(4));
+
+        assertThat(result).hasSize(1).contains(loan);
+    }
+
+    private Loan createLoan() {
+        Book book = getBook();
+        Loan loan = Loan.builder().book(book).customer("Fulano").loanDate(LocalDate.now()).build();
+
+        entityManager.persist(book);
+        entityManager.persist(loan);
+
+        return loan;
+    }
 
 
 

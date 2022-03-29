@@ -3,6 +3,7 @@ package com.cursotdd.libraryapi.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -25,6 +26,9 @@ public class Book {
 
     @Column
     private String isbn;
+
+    @OneToMany(mappedBy = "book")
+    private List<Loan> loans;
 
 
 

@@ -1,4 +1,4 @@
-package com.cursotdd.libraryapi.exception;
+package com.cursotdd.libraryapi.api.exception;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.server.ResponseStatusException;

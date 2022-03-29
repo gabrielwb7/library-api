@@ -1,15 +1,15 @@
 package com.cursotdd.libraryapi.resource.controller;
 
-import com.cursotdd.libraryapi.dto.LoanDTO;
-import com.cursotdd.libraryapi.dto.LoanFilterDTO;
-import com.cursotdd.libraryapi.dto.ReturnedLoanDTO;
-import com.cursotdd.libraryapi.exception.BusinessException;
+import com.cursotdd.libraryapi.api.dto.LoanDTO;
+import com.cursotdd.libraryapi.api.dto.LoanFilterDTO;
+import com.cursotdd.libraryapi.api.dto.ReturnedLoanDTO;
+import com.cursotdd.libraryapi.api.controller.LoanController;
+import com.cursotdd.libraryapi.api.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
 import com.cursotdd.libraryapi.model.entity.Loan;
 import com.cursotdd.libraryapi.service.BookService;
 import com.cursotdd.libraryapi.service.LoanService;
 import com.cursotdd.libraryapi.service.LoanServiceTest;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -59,7 +59,7 @@ public class LoanControllerTest {
     @Test
     public void createLoanTest() throws Exception {
 
-        LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").build();
+        LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").email("customeremail@email.com").build();
         String json = new ObjectMapper().writeValueAsString(dto);
 
         Book book = Book.builder().id(1L).isbn("123").build();
@@ -81,7 +81,7 @@ public class LoanControllerTest {
 
     @Test
     public void invalidISBNCreateLoanTest() throws Exception {
-        LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").build();
+        LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").email("fulano@email.com").build();
         String json = new ObjectMapper().writeValueAsString(dto);
 
         BDDMockito.given(bookService.getBookByIsbn("123")).willReturn(Optional.empty());
@@ -99,7 +99,7 @@ public class LoanControllerTest {
 
     @Test
     public void loanedBookErrorOnCreateLoanTest() throws Exception {
-        LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").build();
+        LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").email("fulano@email.com").build();
         String json = new ObjectMapper().writeValueAsString(dto);
 
         Book book = Book.builder().id(1L).isbn("123").build();

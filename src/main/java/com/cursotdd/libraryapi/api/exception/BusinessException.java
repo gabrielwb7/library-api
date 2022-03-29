@@ -1,4 +1,4 @@
-package com.cursotdd.libraryapi.exception;
+package com.cursotdd.libraryapi.api.exception;
 
 public class BusinessException extends RuntimeException {
     public BusinessException(String msg) {

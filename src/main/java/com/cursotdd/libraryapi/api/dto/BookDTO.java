@@ -1,4 +1,4 @@
-package com.cursotdd.libraryapi.dto;
+package com.cursotdd.libraryapi.api.dto;
 
 import lombok.*;
 

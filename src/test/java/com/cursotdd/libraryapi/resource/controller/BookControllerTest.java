@@ -1,8 +1,11 @@
 package com.cursotdd.libraryapi.resource.controller;
 
-import com.cursotdd.libraryapi.dto.BookDTO;
-import com.cursotdd.libraryapi.exception.BusinessException;
+import com.cursotdd.libraryapi.api.dto.BookDTO;
+import com.cursotdd.libraryapi.api.controller.BookController;
+import com.cursotdd.libraryapi.api.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
+import com.cursotdd.libraryapi.service.EmailService;
+import com.cursotdd.libraryapi.service.LoanService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,8 +27,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.cursotdd.libraryapi.service.BookService;
 
-import javax.swing.text.html.Option;
-
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -46,6 +47,12 @@ public class BookControllerTest {
 
     @MockBean
     BookService service;
+
+    @MockBean
+    LoanService loanService;
+
+    @MockBean
+    EmailService emailService;
 
     @Test
     @DisplayName("Deve criar um livro com sucesso")

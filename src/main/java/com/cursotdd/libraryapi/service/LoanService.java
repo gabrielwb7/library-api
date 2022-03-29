@@ -1,11 +1,12 @@
 package com.cursotdd.libraryapi.service;
 
-import com.cursotdd.libraryapi.dto.LoanFilterDTO;
+import com.cursotdd.libraryapi.api.dto.LoanFilterDTO;
+import com.cursotdd.libraryapi.model.entity.Book;
 import com.cursotdd.libraryapi.model.entity.Loan;
-import com.cursotdd.libraryapi.resource.controller.BookController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface LoanService {
@@ -17,4 +18,8 @@ public interface LoanService {
     Loan update(Loan loan);
 
     Page<Loan> find(LoanFilterDTO filter, Pageable pageable);
+
+    Page<Loan> getLoansByBook(Book book, Pageable pageable);
+
+    List<Loan> getAllLateLoans();
 }

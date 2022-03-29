@@ -1,7 +1,7 @@
-package com.cursotdd.libraryapi.resource.controller;
+package com.cursotdd.libraryapi.api;
 
-import com.cursotdd.libraryapi.exception.ApiError;
-import com.cursotdd.libraryapi.exception.BusinessException;
+import com.cursotdd.libraryapi.api.exception.ApiError;
+import com.cursotdd.libraryapi.api.exception.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

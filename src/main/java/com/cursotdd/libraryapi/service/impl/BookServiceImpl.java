@@ -1,6 +1,6 @@
 package com.cursotdd.libraryapi.service.impl;
 
-import com.cursotdd.libraryapi.exception.BusinessException;
+import com.cursotdd.libraryapi.api.exception.BusinessException;
 import com.cursotdd.libraryapi.model.entity.Book;
 import com.cursotdd.libraryapi.model.repository.BookRepository;
 import com.cursotdd.libraryapi.service.BookService;
